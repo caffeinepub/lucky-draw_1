@@ -1,0 +1,215 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Fraunces - Display font */
+@font-face {
+  font-family: "Fraunces";
+  src: url("/assets/fonts/Fraunces.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Cabinet Grotesk - Body font */
+@font-face {
+  font-family: "Cabinet Grotesk";
+  src: url("/assets/fonts/CabinetGrotesk.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Geist Mono - Mono font */
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/assets/fonts/GeistMono.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+
+    /* Lucky Draw Dark Theme — Deep velvet with gold accents */
+    --background: 0.12 0.025 285;
+    --foreground: 0.95 0.02 90;
+
+    --card: 0.16 0.03 285;
+    --card-foreground: 0.95 0.02 90;
+
+    --popover: 0.18 0.035 285;
+    --popover-foreground: 0.95 0.02 90;
+
+    /* Gold primary */
+    --primary: 0.82 0.16 85;
+    --primary-foreground: 0.12 0.025 285;
+
+    /* Deep purple secondary */
+    --secondary: 0.22 0.05 285;
+    --secondary-foreground: 0.9 0.02 90;
+
+    --muted: 0.2 0.04 285;
+    --muted-foreground: 0.6 0.03 285;
+
+    /* Vivid violet accent */
+    --accent: 0.55 0.22 300;
+    --accent-foreground: 0.98 0 0;
+
+    --destructive: 0.62 0.24 25;
+    --destructive-foreground: 0.98 0 0;
+
+    --border: 0.28 0.06 285;
+    --input: 0.22 0.04 285;
+    --ring: 0.82 0.16 85;
+
+    /* Custom lottery tokens */
+    --gold: 0.82 0.16 85;
+    --gold-dim: 0.65 0.12 85;
+    --gold-bright: 0.92 0.18 88;
+    --violet: 0.55 0.22 300;
+    --violet-dim: 0.4 0.18 300;
+    --emerald: 0.7 0.18 160;
+    --ruby: 0.62 0.24 25;
+    --deep-bg: 0.08 0.02 285;
+    --card-glow: 0.24 0.06 285;
+
+    --chart-1: 0.82 0.16 85;
+    --chart-2: 0.55 0.22 300;
+    --chart-3: 0.7 0.18 160;
+    --chart-4: 0.62 0.24 25;
+    --chart-5: 0.6 0.2 220;
+
+    --sidebar: 0.12 0.025 285;
+    --sidebar-foreground: 0.95 0.02 90;
+    --sidebar-primary: 0.82 0.16 85;
+    --sidebar-primary-foreground: 0.12 0.025 285;
+    --sidebar-accent: 0.22 0.05 285;
+    --sidebar-accent-foreground: 0.9 0.02 90;
+    --sidebar-border: 0.28 0.06 285;
+    --sidebar-ring: 0.82 0.16 85;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Cabinet Grotesk", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html {
+    color-scheme: dark;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: "Fraunces", serif;
+  }
+
+  .font-mono-custom {
+    font-family: "Geist Mono", monospace;
+  }
+
+  /* Ticket perforated edge effect */
+  .ticket-edge-left {
+    position: relative;
+  }
+  .ticket-edge-left::before {
+    content: "";
+    position: absolute;
+    left: -1px;
+    top: 0;
+    height: 100%;
+    width: 2px;
+    background: repeating-linear-gradient(
+      to bottom,
+      oklch(var(--gold)) 0px,
+      oklch(var(--gold)) 8px,
+      transparent 8px,
+      transparent 14px
+    );
+  }
+
+  /* Gold shimmer animation */
+  @keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+
+  .shimmer-gold {
+    background: linear-gradient(
+      90deg,
+      oklch(var(--gold-dim)) 0%,
+      oklch(var(--gold-bright)) 40%,
+      oklch(var(--gold-dim)) 80%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 3s linear infinite;
+  }
+
+  /* Star burst pattern */
+  @keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .animate-spin-slow {
+    animation: spin-slow 20s linear infinite;
+  }
+
+  /* Glow pulse */
+  @keyframes glow-pulse {
+    0%, 100% { box-shadow: 0 0 20px oklch(var(--gold) / 0.3), 0 0 40px oklch(var(--gold) / 0.1); }
+    50% { box-shadow: 0 0 30px oklch(var(--gold) / 0.5), 0 0 60px oklch(var(--gold) / 0.2); }
+  }
+
+  .glow-gold {
+    animation: glow-pulse 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+
+  /* Perforated ticket border */
+  .ticket-perforated {
+    border-style: dashed;
+    border-width: 2px;
+  }
+
+  /* Noise overlay */
+  .noise-overlay::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    border-radius: inherit;
+    opacity: 0.04;
+  }
+
+  /* Mesh gradient bg */
+  .bg-mesh {
+    background:
+      radial-gradient(ellipse at 20% 20%, oklch(0.3 0.08 285 / 0.6) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, oklch(0.25 0.06 300 / 0.5) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 0%, oklch(0.28 0.07 85 / 0.15) 0%, transparent 60%),
+      oklch(var(--background));
+  }
+}
